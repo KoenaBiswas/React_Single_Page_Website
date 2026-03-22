@@ -1,4 +1,4 @@
-name: Deploy React Single Page Website
+name: Deploy React SPA
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout code
+      # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -20,17 +20,17 @@ jobs:
         with:
           node-version: '18'
 
-      # 3️⃣ Install dependencies
+      # 3️⃣ Install dependencies inside Single Page Website folder
       - name: Install dependencies
-        run: npm install
+        run: cd "Single Page Website" && npm install
 
       # 4️⃣ Build React app
       - name: Build
-        run: npm run build
+        run: cd "Single Page Website" && npm run build
 
       # 5️⃣ Deploy to GitHub Pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./Single\ Page\ Website/build
