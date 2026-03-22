@@ -3,7 +3,7 @@
 You can See the Project here :- 
 # [Live Project](https://glittering-praline-bacf98.netlify.app/).
 
-# **Description**
+# **Descript**
 This project is just a Random site to get idea of react and its states.
 On the landing page you see nabar on the top consist of different navigation buttons of different pages,
 project consist of 4 pages namely Home, Services, products and Signup.
