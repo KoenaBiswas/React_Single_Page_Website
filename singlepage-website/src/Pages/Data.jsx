@@ -7,7 +7,7 @@ export const homeObjOne1 = {
   lightTextDesc: true,
   buttonLabel: "Get Started",
   topLine: "Marketing Agency",
-  headline: "Lead Generation Specialist for Online Business",
+  headline: "Lead Genz Specialist for Online Business",
   description:
     "We help business owners increase their revenue. Our team of unique specialist can help you acheive your business goals.",
   start: "",
