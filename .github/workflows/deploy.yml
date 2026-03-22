@@ -1,12 +1,10 @@
 name: Deploy React App to GitHub Pages
 
-# Trigger when code is pushed to main branch
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
 
-# Permissions needed to publish Pages
 permissions:
   contents: read
   pages: write
@@ -17,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Check out the repository
+      # 1) Checkout code
       - uses: actions/checkout@v3
 
       # 2) Setup Node.js
@@ -26,19 +24,26 @@ jobs:
         with:
           node-version: "18.x"
 
-      # 3) Install dependencies
+      # 3) Change to React app directory
+      - name: Change Directory
+        run: cd React_Single_Page_Website
+
+      # 4) Install dependencies
       - name: Install Dependencies
-        run: npm ci
+        run: |
+          cd React_Single_Page_Website
+          npm install
 
-      # 4) Build the React app
+      # 5) Build the React app
       - name: Build
-        run: npm run build
+        run: |
+          cd React_Single_Page_Website
+          npm run build
 
-      # 5) Deploy to gh-pages branch
+      # 6) Deploy to gh-pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-          # Optional: custom commit message
+          publish_dir: ./React_Single_Page_Website/build
           commit_message: "Auto Deploy from GitHub Actions"
