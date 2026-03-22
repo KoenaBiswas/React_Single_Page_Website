@@ -1,4 +1,4 @@
-name: Deploy React App to GitHub Pages
+name: Deploy React SPA to GitHub Pages
 
 on:
   push:
@@ -11,39 +11,33 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Checkout code
+      # 1. Checkout code
       - uses: actions/checkout@v3
 
-      # 2) Setup Node.js
+      # 2. Setup Node.js
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: "18.x"
 
-      # 3) Change to React app directory
-      - name: Change Directory
-        run: cd React_Single_Page_Website
+      # 3. Install dependencies in project subfolder
+      - name: Install dependencies
+        working-directory: ./singlepage-website
+        run: npm install
 
-      # 4) Install dependencies
-      - name: Install Dependencies
-        run: |
-          cd React_Single_Page_Website
-          npm install
-
-      # 5) Build the React app
+      # 4. Build the React app
       - name: Build
-        run: |
-          cd React_Single_Page_Website
-          npm run build
+        working-directory: ./singlepage-website
+        run: npm run build
 
-      # 6) Deploy to gh-pages
-      - name: Deploy
+      # 5. Deploy to gh-pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./React_Single_Page_Website/build
-          commit_message: "Auto Deploy from GitHub Actions"
+          publish_dir: ./singlepage-website/build
+          commit_message: "Deploy React SPA"
