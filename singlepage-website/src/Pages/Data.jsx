@@ -5,7 +5,7 @@ export const homeObjOne1 = {
   lightTopLine: true,
   lightText: true,
   lightTextDesc: true,
-  buttonLabel: "Get Started",
+  buttonLabel: "Getn Started",
   topLine: "Marketing Agency",
   headline: "Lead Genz Specialist for Online Business",
   description:
